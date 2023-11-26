@@ -1,15 +1,6 @@
 ﻿
 
 Imports myExcel = Microsoft.Office.Interop.Excel
-'Imports Microsoft.Office.Interop.Excel
-'Imports System.Security.Cryptography
-'Imports System.Runtime.InteropServices
-'Imports Microsoft.Office.Interop
-'Imports Microsoft.Office.Core
-'Imports System.IO
-'Imports System.Linq.Expressions
-'Imports Microsoft.Office.Core
-'Imports System.Windows.Forms.DataVisualization.Charting
 
 Public Class Excel_Access
 
@@ -18,9 +9,7 @@ Public Class Excel_Access
     Public _xlWorkBook As myExcel.Workbook
     Public _xlWorkSheet As myExcel.Worksheet
     Public _xlWorkSheet_ChartSheet As myExcel.Worksheet
-    'Dim xlApp As New Microsoft.Office.Interop.Excel.ApplicationClass
-    'Dim xlWorkBook As Microsoft.Office.Interop.Excel.Workbook = Nothing
-    'Dim xlWorkSheet As Microsoft.Office.Interop.Excel.Worksheet
+   
     Public _IsOpenWorkFile As Boolean = False
 
     Public _ChartTitle As String
@@ -76,7 +65,7 @@ Public Class Excel_Access
         Try
 
             _xlWorkSheet.Columns.AutoFit()
-            _xlWorkBook.SaveAs(xlFilePath) ', Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlShared)
+            _xlWorkBook.SaveAs(xlFilePath) 
             _xlWorkBook.Close()
 
             retStr = "Done"
@@ -142,11 +131,7 @@ Public Class Excel_Access
 
         Try
             Dim retStr As String = "Done"
-            '_xlApp = New myExcel.Application
-            '_xlApp.DisplayAlerts = False
-
-            '_xlWorkBooks = _xlApp.Workbooks
-            '_xlWorkBook = _xlWorkBooks.Open(xlFilePath)
+   
             If _xlWorkBook Is Nothing Then
                 Return "Not open file yet."
             End If
@@ -154,16 +139,6 @@ Public Class Excel_Access
                 Return "Not open file yet."
             End If
 
-            'Dim chartSheet As String = Replace(xlSheetName, "DATA", "CHART")
-
-            '_xlWorkSheet_ChartSheet = _xlWorkBook.Worksheets(chartSheet)
-            'If _xlWorkSheet_ChartSheet Is Nothing Then
-            '    _xlWorkBook?.Close()
-            '    retStr = "The chart sheet not found."
-            '    Return retStr
-            'End If
-
-            '_xlWorkSheet_ChartSheet.Activate()
             Dim chartPage As myExcel.Chart
             Dim xlCharts As myExcel.ChartObjects
             Dim myChart As myExcel.ChartObject
@@ -184,7 +159,7 @@ Public Class Excel_Access
                         dataSeries.Values = _xlWorkSheet.Range(_LineRange(0)).ClearContents()
                         ' Set X range
                         dataSeries.XValues = _xlWorkSheet.Range(_LineRange(1)).ClearContents()
-                        dataSeries.Name = _LineName(0)     ' "10V"
+                        dataSeries.Name = _LineName(0)    
                         'dataSeries.Border.Color = Color.DodgerBlue
                     End If
 
@@ -192,7 +167,7 @@ Public Class Excel_Access
                         Dim dataSeries1 As myExcel.Series = .SeriesCollection.NewSeries()
                         dataSeries1.Values = _xlWorkSheet.Range(_LineRange(2)).ClearContents()
                         dataSeries1.XValues = _xlWorkSheet.Range(_LineRange(3)).ClearContents()
-                        dataSeries1.Name = _LineName(1)     ' "12V"
+                        dataSeries1.Name = _LineName(1)     '
                         'dataSeries1.Border.Color = Color.MediumSeaGreen
                     End If
 
@@ -200,7 +175,7 @@ Public Class Excel_Access
                         Dim dataSeries2 As myExcel.Series = .SeriesCollection.NewSeries()
                         dataSeries2.Values = _xlWorkSheet.Range(_LineRange(4)).ClearContents()
                         dataSeries2.XValues = _xlWorkSheet.Range(_LineRange(5)).ClearContents()
-                        dataSeries2.Name = _LineName(2)     ' "14V"
+                        dataSeries2.Name = _LineName(2)     ' 
                         'dataSeries2.Border.Color = Color.Purple
                     End If
 
@@ -208,7 +183,7 @@ Public Class Excel_Access
                         Dim dataSeries3 As myExcel.Series = .SeriesCollection.NewSeries()
                         dataSeries3.Values = _xlWorkSheet.Range(_LineRange(6)).ClearContents()
                         dataSeries3.XValues = _xlWorkSheet.Range(_LineRange(7)).ClearContents()
-                        dataSeries3.Name = _LineName(3)     ' "16V"
+                        dataSeries3.Name = _LineName(3)    
                         'dataSeries1.Border.Color = Color.Brown
                     End If
 
@@ -216,7 +191,7 @@ Public Class Excel_Access
                         Dim dataSeries4 As myExcel.Series = .SeriesCollection.NewSeries()
                         dataSeries4.Values = _xlWorkSheet.Range(_LineRange(8)).ClearContents()
                         dataSeries4.XValues = _xlWorkSheet.Range(_LineRange(9)).ClearContents()
-                        dataSeries4.Name = _LineName(4)     ' "18V"
+                        dataSeries4.Name = _LineName(4)     
                         'dataSeries2.Border.Color = Color.Coral
 
                     End If
@@ -224,7 +199,7 @@ Public Class Excel_Access
                         Dim dataSeries5 As myExcel.Series = .SeriesCollection.NewSeries()
                         dataSeries5.Values = _xlWorkSheet.Range(_LineRange(10)).ClearContents()
                         dataSeries5.XValues = _xlWorkSheet.Range(_LineRange(11)).ClearContents()
-                        dataSeries5.Name = _LineName(5)     ' "20V"
+                        dataSeries5.Name = _LineName(5)    
                         'dataSeries1.Border.Color = Color.DarkGreen
 
                     End If
@@ -248,7 +223,7 @@ Public Class Excel_Access
 
                 'chart title
                 .HasTitle = True
-                .ChartTitle.Text = _ChartTitle '"Typical Output Characteristics TJ = -40°C"
+                .ChartTitle.Text = _ChartTitle '
                 .ChartTitle.Font.Size = 14
                 .ChartTitle.Font.Bold = False
                 'set titles for Axis values and categories
@@ -257,13 +232,13 @@ Public Class Excel_Access
                 ' Set X information
                 xlAxisCategory = CType(chartPage.Axes(, myExcel.XlAxisGroup.xlPrimary), myExcel.Axes)
                 xlAxisCategory.Item(myExcel.XlAxisType.xlCategory).HasTitle = True
-                xlAxisCategory.Item(myExcel.XlAxisType.xlCategory).AxisTitle.Characters.Text = _X_Axise '"VDS - Drain-to-Source Voltage (V)"
+                xlAxisCategory.Item(myExcel.XlAxisType.xlCategory).AxisTitle.Characters.Text = _X_Axise '
                 xlAxisCategory.Item(myExcel.XlAxisType.xlCategory).AxisTitle.Characters.Font.Bold = False
 
                 ' Set Y information
                 xlAxisValue = CType(chartPage.Axes(, myExcel.XlAxisGroup.xlPrimary), myExcel.Axes)
                 xlAxisValue.Item(myExcel.XlAxisType.xlValue).HasTitle = True
-                xlAxisValue.Item(myExcel.XlAxisType.xlValue).AxisTitle.Characters.Text = _Y_Axise '"ID - Drain-to-Source Current (A)"
+                xlAxisValue.Item(myExcel.XlAxisType.xlValue).AxisTitle.Characters.Text = _Y_Axise '
                 xlAxisValue.Item(myExcel.XlAxisType.xlValue).AxisTitle.Characters.Font.Bold = False
                 xlAxisValue.Item(myExcel.XlAxisType.xlValue).MaximumScale = _Y_MaxScale ' 100
                 xlAxisValue.Item(myExcel.XlAxisType.xlValue).MinimumScale = _Y_MinScale ' 0.0
@@ -282,10 +257,6 @@ Public Class Excel_Access
                 xlAxisValue.Item(myExcel.XlAxisType.xlCategory).HasMinorGridlines = True
 
             End With
-
-            '_xlWorkSheet.SaveAs(DataSheetPath)
-            '_xlWorkBook.Close()
-            '_xlApp.Quit()
 
             Return retStr
 
